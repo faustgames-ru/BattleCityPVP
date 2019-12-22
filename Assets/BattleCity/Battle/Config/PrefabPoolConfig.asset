@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69241c3d924a4be6b3010ea447695016, type: 3}
+  m_Name: PrefabPoolConfig
+  m_EditorClassIdentifier: 
+  pools:
+  - prefabId: Player
+    origin: {fileID: 2614475118911264858, guid: d14b95bfa65823343a80b3e8d4ef9dd3,
+      type: 3}
+    capacity: 2
+    reportEvents: 1
+    mode: 1
+  - prefabId: Projectile
+    origin: {fileID: 5242300048871449544, guid: cd5a942d38aac6f43b93032bdc89622f,
+      type: 3}
+    capacity: 10
+    reportEvents: 1
+    mode: 1

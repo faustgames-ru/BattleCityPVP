@@ -19,7 +19,7 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmString trigger;
 		
 		private Animator _animator;
-		
+
 		public override void Reset()
 		{
 			gameObject = null;

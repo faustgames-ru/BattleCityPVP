@@ -83,8 +83,7 @@ namespace HutongGames.PlayMaker.Pun2
 
             DontDestroyOnLoad(this.gameObject);
         }
-
-
+        
         /// <summary>
         /// Used to check for fsm that required a photon view, and make sure it is set up properly: fsm<->playmakerPhotonView<->PhotonView
         /// </summary>
