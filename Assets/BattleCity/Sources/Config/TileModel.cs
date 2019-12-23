@@ -7,8 +7,6 @@ namespace BattleCity.Config
     public class TileModel : ScriptableObject
     {
         public Tile[] tiles;
-        public int health;
-        public int armor;
-        public bool immortal;
+        public DamageReceiverModel damageReceiver = new DamageReceiverModel();
     }
 }

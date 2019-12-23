@@ -20,13 +20,11 @@ namespace CoreUtils.Collections
             var instance = Object.Instantiate(_origin, _parent);
             instance.SetActive(false);
             var result = new PoolItem(instance, this, _reportEvents);
-            result.ReportGetInstance();
             return result;
         }
 
         public void Return(PoolItem poolItem)
         {
-            poolItem.ReportReturnInstance();
             Object.Destroy(poolItem.Instance);
         }
     }

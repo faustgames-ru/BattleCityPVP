@@ -13,15 +13,21 @@ MonoBehaviour:
   m_Name: PrefabPoolConfig
   m_EditorClassIdentifier: 
   pools:
-  - prefabId: Player
+  - prefabId: PlayerMaster
     origin: {fileID: 2614475118911264858, guid: d14b95bfa65823343a80b3e8d4ef9dd3,
       type: 3}
-    capacity: 2
+    capacity: 1
     reportEvents: 1
-    mode: 1
+    mode: 0
   - prefabId: Projectile
     origin: {fileID: 5242300048871449544, guid: cd5a942d38aac6f43b93032bdc89622f,
       type: 3}
-    capacity: 10
+    capacity: 16
     reportEvents: 1
     mode: 1
+  - prefabId: PlayerSlave
+    origin: {fileID: 5781633330368458076, guid: fe3b15fadfafb644093f7542b8dfd000,
+      type: 3}
+    capacity: 1
+    reportEvents: 1
+    mode: 0

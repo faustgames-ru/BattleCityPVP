@@ -1,4 +1,5 @@
-﻿using HutongGames.PlayMaker.Actions;
+﻿using System.Collections.Generic;
+using HutongGames.PlayMaker.Actions;
 using UnityEngine;
 
 namespace CoreUtils.Collections
@@ -8,6 +9,7 @@ namespace CoreUtils.Collections
         public GameObject Instance { get; }
         public IPool Owner { get; }
         private readonly IPoolListener[] _listeners;
+        private readonly IInject[] _injects;
         private readonly Transform _transform;
         private readonly ApplyTransformArgs _applyTransformArgs = new ApplyTransformArgs();
 
@@ -18,6 +20,19 @@ namespace CoreUtils.Collections
             _transform = instance.GetComponent<Transform>();
             if (!reportEvents) return;
             _listeners = instance.GetComponentsInChildren<IPoolListener>();
+            _injects = instance.GetComponentsInChildren<IInject>();
+        }
+
+        public void GetInjects<T>(List<T> injects) where T : IInject
+        {
+            injects.Clear();
+            foreach (var inject in _injects)
+            {
+                if (inject is T tInject)
+                {
+                    injects.Add(tInject);
+                }
+            }
         }
 
         public void ReportGetInstance()

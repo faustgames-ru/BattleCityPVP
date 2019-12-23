@@ -17,6 +17,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c03f9fd5c1445094eb13ad1279b2ba57, type: 2}
   - {fileID: 11400000, guid: 3744e6da50fa1c049b8da54ad134c63f, type: 2}
   - {fileID: 11400000, guid: dc506359af5fed44d957be85b07f2076, type: 2}
-  health: 10
-  armor: 10
-  immortal: 0
+  damageReceiver:
+    health: 10
+    armor: 10
+    immortal: 0

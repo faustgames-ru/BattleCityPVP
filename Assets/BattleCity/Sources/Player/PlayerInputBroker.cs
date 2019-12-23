@@ -28,7 +28,7 @@ namespace BattleCity.Player
         private void InputControllerOnFire(object sender)
         {
             if (!photonView.IsMine && PhotonNetwork.IsConnected) return;
-            fireController.Fire(directionController.GetDirection());
+            fireController.Fire(moveController.GetPosition(), directionController.GetDirection());
         }
 
         private void InputOnDirectionChanged(object sender, Vector3 direction)

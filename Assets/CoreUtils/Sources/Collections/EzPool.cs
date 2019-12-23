@@ -34,7 +34,6 @@ namespace CoreUtils.Collections
             var result = _pool.Count == 0
                 ?Instantiate()
                 :_pool.Dequeue();
-            result.ReportGetInstance();
             return result;
         }
 
@@ -47,7 +46,6 @@ namespace CoreUtils.Collections
             }
 
             poolItem.Instance.SetActive(false);
-            poolItem.ReportReturnInstance();
             _pool.Enqueue(poolItem);
         }
     }

@@ -5,17 +5,55 @@ namespace BattleCity.Game
 {
     public class GameController: MonoBehaviour
     {
-        public string playerPrefabId = "Player";
-        public Transform spawnPoint;
+        public PlayMakerFSM fsm;
+        public string minePlayerDeadEvent = "PLAYER DEAD";
+        public string loseEvent = "LOSE";
+        public string victoryEvent = "VICTORY";
+        public bool gameFinished;
 
-        private void Awake()
+        public void MinePlayerDead()
         {
-            
+            if (gameFinished) return;
+            fsm.SendEvent(minePlayerDeadEvent);
         }
 
-        public void SpawnPlayer()
+        public void CommandCenterDead(bool master)
         {
-            PhotonNetwork.Instantiate(playerPrefabId, spawnPoint.position, spawnPoint.rotation);
+            if(gameFinished) return;
+
+            gameFinished = true;
+            if (master)
+            {
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    Lose();
+                }
+                else
+                {
+                    Victory();
+                }
+            }
+            else
+            {
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    Victory();
+                }
+                else
+                {
+                    Lose();
+                }
+            }
+        }
+
+        private void Lose()
+        {
+            fsm.SendEvent(loseEvent);
+        }
+
+        private void Victory()
+        {
+            fsm.SendEvent(victoryEvent);
         }
     }
 }

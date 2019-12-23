@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 400000}
   - component: {fileID: 114729846300317852}
-  - component: {fileID: 11400002}
   - component: {fileID: 11400004}
+  - component: {fileID: 11400002}
   m_Layer: 0
   m_Name: PlayMaker Photon Proxy
   m_TagString: Untagged
@@ -55,20 +55,6 @@ MonoBehaviour:
   LastJoinRoomFailedMessage: 
   LastJoinRandomRoomFailedReturnCode: 0
   LastJoinRandomRoomFailedMessage: 
---- !u!114 &11400002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b9e755463b37471a805fa8a5bce6dac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debug: 1
-  LogMessageInfo: 1
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,10 +70,24 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 1
+  Synchronization: 0
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 11400002}
+  - {fileID: 0}
   viewIdField: 0
   InstantiationId: 1
   isRuntimeInstantiated: 0
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b9e755463b37471a805fa8a5bce6dac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debug: 1
+  LogMessageInfo: 1

@@ -1247,10 +1247,10 @@ RectTransform:
   m_Father: {fileID: 2132813335}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -0.15997314, y: 300.02}
-  m_SizeDelta: {x: 1053.8, y: 599.84}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0.000061035156, y: 0.020019531}
+  m_SizeDelta: {x: -0.24902, y: -0.2000122}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &886842395
 MonoBehaviour:
@@ -1341,7 +1341,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -0.000059373386, w: 0}
   m_textInfo:
     textComponent: {fileID: 886842395}
     characterCount: 1
@@ -1447,7 +1447,7 @@ MonoBehaviour:
       colorIndex: 5
       position:
         serializedVersion: 2
-        x: 392.6797
+        x: 472.6797
         y: 260.57812
         width: 100
         height: 32
@@ -1553,7 +1553,7 @@ MonoBehaviour:
       colorIndex: 2
       position:
         serializedVersion: 2
-        x: 684.5781
+        x: 764.5781
         y: 457.65625
         width: 294
         height: 32
@@ -1598,7 +1598,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: 0.3
+          value: 0.5
         fsmIntParams: []
         fsmBoolParams: []
         fsmVector2Params: []
@@ -1609,7 +1609,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: {r: 0, g: 0, b: 0, a: 1}
+          value: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 1}
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams:
@@ -1632,7 +1632,7 @@ MonoBehaviour:
       colorIndex: 6
       position:
         serializedVersion: 2
-        x: 798.03125
+        x: 878.03125
         y: 536.09375
         width: 101
         height: 16
@@ -1720,8 +1720,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 91.94531
-        y: 261.3047
+        x: 53.875
+        y: 431.3672
         width: 211
         height: 16
       isBreakpoint: 0
@@ -1788,7 +1788,7 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 710.6719
+        x: 790.6719
         y: 329.0703
         width: 228
         height: 16
@@ -1840,7 +1840,7 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 343.0703
+        x: 423.0703
         y: 445.4453
         width: 184
         height: 16
@@ -1934,7 +1934,7 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 702.5156
+        x: 782.5156
         y: 205.89062
         width: 327
         height: 16
@@ -2047,7 +2047,7 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 368.9453
+        x: 448.9453
         y: 177.47656
         width: 213
         height: 32
@@ -2186,7 +2186,7 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 337.52344
+        x: 417.52344
         y: 347.64844
         width: 183
         height: 32
@@ -2325,8 +2325,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 110.66406
-        y: 181.88281
+        x: 120.328125
+        y: 184.07031
         width: 163
         height: 32
       isBreakpoint: 0
@@ -2337,7 +2337,7 @@ MonoBehaviour:
           name: FINISHED
           isSystemEvent: 1
           isGlobal: 0
-        toState: Pun Connect Using Settings
+        toState: Pun Get Client State
         linkStyle: 0
         linkConstraint: 0
         colorIndex: 0
@@ -2464,7 +2464,7 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 56.601562
+        x: 136.60156
         y: 103.17969
         width: 255
         height: 32
@@ -2528,6 +2528,188 @@ MonoBehaviour:
         - AutomaticallySyncScene
         paramDataPos: 00000000
         paramByteDataSize: 00000000
+    - name: Pun Get Client State
+      description: 
+      colorIndex: 0
+      position:
+        serializedVersion: 2
+        x: 101
+        y: 252
+        width: 163
+        height: 32
+      isBreakpoint: 0
+      isSequence: 0
+      hideUnused: 0
+      transitions:
+      - fsmEvent:
+          name: FINISHED
+          isSystemEvent: 1
+          isGlobal: 0
+        toState: Enum Compare
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
+      actionData:
+        actionNames:
+        - HutongGames.PlayMaker.Pun2.Actions.PunGetClientState
+        customNames:
+        - 
+        actionEnabled: 01
+        actionIsOpen: 01
+        actionStartIndex: 00000000
+        actionHashCodes: 8ddec002
+        unityObjectParams: []
+        fsmGameObjectParams: []
+        fsmOwnerDefaultParams: []
+        animationCurveParams: []
+        functionCallParams: []
+        fsmTemplateControlParams: []
+        fsmEventTargetParams: []
+        fsmPropertyParams: []
+        layoutOptionParams: []
+        fsmStringParams: []
+        fsmObjectParams: []
+        fsmVarParams: []
+        fsmArrayParams: []
+        fsmEnumParams:
+        - useVariable: 1
+          name: ClientState
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          enumName: Photon.Realtime.ClientState
+          intValue: 0
+        - useVariable: 1
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          enumName: Photon.Realtime.ClientState
+          intValue: 0
+        fsmFloatParams: []
+        fsmIntParams: []
+        fsmBoolParams: []
+        fsmVector2Params: []
+        fsmVector3Params: []
+        fsmColorParams: []
+        fsmRectParams: []
+        fsmQuaternionParams: []
+        stringParams:
+        - 
+        byteData: 0000
+        arrayParamSizes: 
+        arrayParamTypes: []
+        customTypeSizes: 01000000
+        customTypeNames:
+        - HutongGames.PlayMaker.Pun2.Actions.PunActionHeader
+        paramDataType: 2a0000002a00000017000000010000002800000001000000
+        paramName:
+        - clientState
+        - previousClientState
+        - OnClientStateChanged
+        - everyFrame
+        - header
+        - NetworkOperationPending
+        paramDataPos: 000000000100000000000000000000000000000001000000
+        paramByteDataSize: 000000000000000000000000010000000000000001000000
+    - name: Enum Compare
+      description: 
+      colorIndex: 0
+      position:
+        serializedVersion: 2
+        x: 105
+        y: 314
+        width: 213
+        height: 48
+      isBreakpoint: 0
+      isSequence: 0
+      hideUnused: 0
+      transitions:
+      - fsmEvent:
+          name: FINISHED
+          isSystemEvent: 1
+          isGlobal: 0
+        toState: Pun Connect Using Settings
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
+      - fsmEvent:
+          name: PHOTON / ON CONNECTED
+          isSystemEvent: 0
+          isGlobal: 1
+        toState: Connection->StartGame
+        linkStyle: 0
+        linkConstraint: 0
+        colorIndex: 0
+      actionData:
+        actionNames:
+        - HutongGames.PlayMaker.Actions.EnumCompare
+        customNames:
+        - 
+        actionEnabled: 01
+        actionIsOpen: 01
+        actionStartIndex: 00000000
+        actionHashCodes: d1c47802
+        unityObjectParams: []
+        fsmGameObjectParams: []
+        fsmOwnerDefaultParams: []
+        animationCurveParams: []
+        functionCallParams: []
+        fsmTemplateControlParams: []
+        fsmEventTargetParams: []
+        fsmPropertyParams: []
+        layoutOptionParams: []
+        fsmStringParams: []
+        fsmObjectParams: []
+        fsmVarParams: []
+        fsmArrayParams: []
+        fsmEnumParams:
+        - useVariable: 1
+          name: ClientState
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          enumName: Photon.Realtime.ClientState
+          intValue: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          enumName: Photon.Realtime.ClientState
+          intValue: 0
+        fsmFloatParams: []
+        fsmIntParams: []
+        fsmBoolParams:
+        - useVariable: 1
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        fsmVector2Params: []
+        fsmVector3Params: []
+        fsmColorParams: []
+        fsmRectParams: []
+        fsmQuaternionParams: []
+        stringParams:
+        - FINISHED
+        - PHOTON / ON CONNECTED
+        byteData: 00
+        arrayParamSizes: 
+        arrayParamTypes: []
+        customTypeSizes: 
+        customTypeNames: []
+        paramDataType: 2a0000002a00000017000000170000001100000001000000
+        paramName:
+        - enumVariable
+        - compareTo
+        - equalEvent
+        - notEqualEvent
+        - storeResult
+        - everyFrame
+        paramDataPos: 000000000100000000000000010000000000000000000000
+        paramByteDataSize: 000000000000000000000000000000000000000001000000
     events:
     - name: FINISHED
       isSystemEvent: 1
@@ -2625,10 +2807,17 @@ MonoBehaviour:
       materialVariables: []
       textureVariables: []
       arrayVariables: []
-      enumVariables: []
+      enumVariables:
+      - useVariable: 1
+        name: ClientState
+        tooltip: 
+        showInInspector: 0
+        networkSync: 0
+        enumName: Photon.Realtime.ClientState
+        intValue: 0
       categories:
       - 
-      variableCategoryIDs: 0000000000000000000000000000000000000000
+      variableCategoryIDs: 000000000000000000000000000000000000000000000000
     description: 
     docUrl: 
     showStateLabel: 0
@@ -3463,6 +3652,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 9b9a57edc50934a459fe9fbe6cdb6f5c, type: 3}
       propertyPath: m_Name
       value: PlayMaker Photon Proxy
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 9b9a57edc50934a459fe9fbe6cdb6f5c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9b9a57edc50934a459fe9fbe6cdb6f5c, type: 3}
       propertyPath: m_RootOrder

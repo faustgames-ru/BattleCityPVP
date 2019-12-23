@@ -15,6 +15,7 @@ MonoBehaviour:
   tiles:
   - {fileID: 11400000, guid: d40e41d1f994f674bb4213a4a55d3ab5, type: 2}
   - {fileID: 11400000, guid: c2e0c9bd40d688e48b8ece6b7983ecdd, type: 2}
-  health: 10
-  armor: 0
-  immortal: 0
+  damageReceiver:
+    health: 10
+    armor: 0
+    immortal: 0

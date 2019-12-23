@@ -1,12 +1,15 @@
 ﻿using CoreUtils.Collections;
+using Photon.Pun;
 using UnityEngine;
 
 namespace BattleCity.Player
 {
-    public class PlayerDirectionController: MonoBehaviour
+    public class PlayerDirectionController: MonoBehaviour, IPunObservable
     {
         [SerializeField]
         private Animator animator;
+        [SerializeField]
+        private PhotonView photonView;
         [SerializeField]
         private PlayerDirectionTrigger[] triggers =
         {
@@ -20,6 +23,12 @@ namespace BattleCity.Player
         
         public void SetDirection(Vector3 direction)
         {
+            if (!photonView.IsMine && PhotonNetwork.IsConnected) return;
+            SetDirectionInternal(direction);
+        }
+
+        private void SetDirectionInternal(Vector3 direction)
+        {
             if (direction == Vector3.zero) return;
             var directionTrigger = triggers.Max(PlayerDirectionTrigger.Dot, direction);
             if (directionTrigger == _currentDirection) return;
@@ -31,6 +40,18 @@ namespace BattleCity.Player
         {
             if (_currentDirection == null) return Vector3.zero;
             return _currentDirection.Direction;
+        }
+
+        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        {
+            if (stream.IsWriting)
+            {
+                stream.SendNext(GetDirection());
+            }
+            else
+            {
+                SetDirectionInternal((Vector3) stream.ReceiveNext());
+            }
         }
     }
 }

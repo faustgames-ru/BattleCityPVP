@@ -1,77 +1,86 @@
 ﻿using System.Collections.Generic;
 using BattleCity.Config;
+using BattleCity.Game;
+using BattleCity.Game.Damage;
+using BattleCity.Level;
 using CoreUtils.Collections;
-using CoreUtils.Physics;
+using Photon.Pun;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 namespace BattleCity.Player
 {
-    public class Projectile: MonoBehaviour
+    public class Projectile: MonoBehaviour, IDamageSystemInject
     {
-        public PoolListener poolListener;
-        public Rigidbody2DListener rigidbodyListener;
-        public Rigidbody2D body;
-        public PlayerModel playerModel;
-        public Rigidbody2D ownerPlayerBody;
+        [SerializeField]
+        private PoolListener poolListener;
+        [SerializeField]
+        private Rigidbody2D body;
+        [SerializeField]
+        private PlayerModel playerModel;
+        [SerializeField]
+        private PhotonView photonView;
+        [SerializeField]
+        private GameObject view;
+        [SerializeField]
+        private ParticleSystem explosion;
+
         private PoolItem _poolItem;
         private Transform _transform;
-
-        private readonly List<ContactPoint2D> _contacts = new List<ContactPoint2D>();
+        private DamageSystem _damageSystem;
+        private DamageSpawner _damageSpawner;
 
         private void Awake()
         {
             _transform = GetComponent<Transform>();
+            _damageSpawner = new DamageSpawner(_transform, playerModel.damageSpawner);
+            _damageSpawner.Muted += DamageSpawnerOnMuted;
+            _damageSpawner.Dead += DamageSpawnerOnDead;
+            _damageSpawner.Collision += DamageSpawnerOnCollision;
             poolListener.GetInstance += PoolListenerOnGetInstance;
-            poolListener.ApplyTransform += PoolListenerOnApplyTransform;
-            rigidbodyListener.CollisionEnter += RigidbodyListenerOnCollisionEnter;
+            poolListener.ReturnInstance += PoolListenerOnReturnInstance;
         }
 
-        private void PoolListenerOnApplyTransform(PoolItem sender, ApplyTransformArgs e)
+        private void DamageSpawnerOnMuted()
         {
-            body.position = e.position;
+            view.SetActive(false);
         }
 
-        private void RigidbodyListenerOnCollisionEnter(Rigidbody2D sender, Collision2D collision)
+        private void DamageSpawnerOnCollision()
         {
-            if (collision.rigidbody == ownerPlayerBody) return;
-
-            // crutch
-            collision.GetContacts(_contacts);
-            foreach (var hit in _contacts)
+            if (explosion != null)
             {
-                var hitPosition = hit.point - 0.04f * hit.normal;
-                var tileMap = hit.collider.GetComponent<Tilemap>();
-                if (tileMap != null)
-                {
-                    var tileAddress = tileMap.WorldToCell(hitPosition);
-                    var tile = tileMap.GetTile<Tile>(tileAddress);
-                    //tile.
-                    //tile.
-                    tileMap.SetTile(tileMap.WorldToCell(hitPosition), null);
-                }
+                explosion.Play();
             }
-            // todo: fx, damage tile & players & return 2 pool
-            _poolItem.Return();
         }
 
-
-        private void RigidbodyListenerOnTriggerEnter(Rigidbody2D sender, Collider2D other)
+        private void DamageSpawnerOnDead()
         {
-            if (other.attachedRigidbody == ownerPlayerBody) return;
+            if (!photonView.IsMine && PhotonNetwork.IsConnected) return;
+            PhotonNetwork.Destroy(_poolItem.Instance);
+        }
 
-           
-            // todo: fx, damage tile & players & return 2 pool
-            _poolItem.Return();
+        public void Inject(DamageSystem damageSystem)
+        {
+            _damageSystem = damageSystem;
         }
 
         private void PoolListenerOnGetInstance(PoolItem sender)
         {
             _poolItem = sender;
+            view.SetActive(true);
+            _damageSpawner.Reset();
+            _damageSystem.AddSpawner(_damageSpawner);
         }
 
-        private void Update()
+        private void PoolListenerOnReturnInstance(PoolItem sender)
         {
+            _damageSystem.RemoveSpawner(_damageSpawner);
+        }
+        
+        private void FixedUpdate()
+        {
+            if (!photonView.IsMine && PhotonNetwork.IsConnected) return;
+            if (_damageSpawner.IsMuted) return;
             body.velocity = _transform.up * playerModel.projectileVelocity;
         }
     }

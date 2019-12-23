@@ -10,10 +10,13 @@ namespace BattleCity.Game
     {
         [SerializeField]
         private PrefabPoolConfig config;
+        
+        public event EzPunPrefabPoolEvent Instantiated;
 
         private readonly Dictionary<string, IPool> _pools = new Dictionary<string, IPool>();
         private readonly Dictionary<GameObject, PoolItem> _items = new Dictionary<GameObject, PoolItem>();
         private Transform _transform;
+        private readonly EzPunPrefabPoolEventErgs _ezPunPrefabPoolEventErgs = new EzPunPrefabPoolEventErgs();
 
         private void Awake()
         {
@@ -45,6 +48,8 @@ namespace BattleCity.Game
             if (!_pools.ContainsKey(prefabId)) return null;
             var pool = _pools[prefabId];
             var result = pool.Get();
+            OnInstantiated(prefabId, result);
+            result.ReportGetInstance();
             result.ApplyTransform(position, rotation);
             _items[result.Instance] = result;
             return result.Instance;
@@ -54,13 +59,22 @@ namespace BattleCity.Game
         {
             if (!_items.ContainsKey(instance))
             {
-                Debug.LogError($"Destroy bastard instance {instance.name}", instance);
+                // todo: debug this bullshit
+                //Debug.LogError($"Destroy bastard instance {instance.name}", instance);
                 return;
             }
 
             var poolItem = _items[instance];
             _items.Remove(poolItem.Instance);
+            poolItem.ReportReturnInstance();
             poolItem.Return();
+        }
+
+        protected virtual void OnInstantiated(string prefabId, PoolItem item)
+        {
+            _ezPunPrefabPoolEventErgs.prefabId = prefabId;
+            _ezPunPrefabPoolEventErgs.item = item;
+            Instantiated?.Invoke(this, _ezPunPrefabPoolEventErgs);
         }
     }
 }
