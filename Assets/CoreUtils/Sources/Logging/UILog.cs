@@ -11,6 +11,9 @@ namespace CoreUtils.Logging
         [SerializeField]
         private int linesCount = 5;
 
+        [SerializeField]
+        private UILogColor[] logColors;
+
         private const string NextLine = "\n\r";
 
         private readonly List<string> _log = new List<string>();
@@ -22,6 +25,11 @@ namespace CoreUtils.Logging
 
         private void ApplicationOnLogMessageReceived(string condition, string stacktrace, LogType type)
         {
+            foreach (var logColor in logColors)
+            {
+                condition = logColor.Replace(condition);
+            }
+
             _log.Add(condition);
             var min = Mathf.Max(_log.Count - linesCount, 0);
             var logText = string.Empty;
