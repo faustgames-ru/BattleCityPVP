@@ -26,6 +26,7 @@ namespace BattleCity.Game.PlayMaker
 
         public override void OnEnter()
         {
+            base.OnEnter();
             foreach (var item in objects.Values)
             {
                 var gameObject = item as GameObject;

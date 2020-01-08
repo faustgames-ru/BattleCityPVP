@@ -1,9 +1,11 @@
-﻿using HutongGames.PlayMaker;
+﻿using System;
+using HutongGames.PlayMaker;
 using Photon.Pun;
 using UnityEngine;
 
 namespace BattleCity.Game.PlayMaker
 {
+    [Serializable]
     [ActionCategory("BattleCity")]
     [HutongGames.PlayMaker.Tooltip("Instantiate Photon Network instance, without proxies and fsm sync")]
     public class SpawnPrefab : FsmStateAction
@@ -39,6 +41,7 @@ namespace BattleCity.Game.PlayMaker
 
         public override void OnEnter()
         {
+            base.OnEnter();
             PhotonNetwork.Instantiate(prefabId.Value, SpawnPoint.position, SpawnPoint.rotation);
             Finish();
         }

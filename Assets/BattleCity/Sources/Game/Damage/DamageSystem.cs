@@ -40,11 +40,13 @@ namespace BattleCity.Game.Damage
                     _mutedList.Add(damageSpawner);
                     continue;
                 }
+
                 damageFilter.FilterReceivers(damageSpawner.Bounds, _receivers);
                 var hasCollision = false;
                 var hasBlock = false;
                 foreach (var receiver in _receivers)
                 {
+                    if (!receiver.damageLayer.Intersects(damageSpawner.damageLayer)) continue;
                     if (!receiver.IsAlive) continue;
                     if (!receiver.ApplyDamage(damageSpawner))
                     {
@@ -53,6 +55,22 @@ namespace BattleCity.Game.Damage
 
                     hasCollision = true;
                 }
+
+                if (damageSpawner.collisionWithSpawners)
+                {
+                    foreach (var otherSpawner in _damageSpawners)
+                    {
+                        if (otherSpawner == damageSpawner) continue;
+                        if (!otherSpawner.IsAlive) continue;
+                        if (otherSpawner.IsMuted) continue;
+                        if (damageSpawner.Bounds.Intersects(otherSpawner.Bounds))
+                        {
+                            hasCollision = true;
+                        }
+                    }
+                }
+
+
                 if (hasBlock)
                 {
                     damageSpawner.ReportBlock();

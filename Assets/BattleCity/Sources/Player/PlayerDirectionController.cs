@@ -20,7 +20,7 @@ namespace BattleCity.Player
         };
 
         private PlayerDirectionTrigger _currentDirection;
-        
+
         public void SetDirection(Vector3 direction)
         {
             if (!photonView.IsMine && PhotonNetwork.IsConnected) return;

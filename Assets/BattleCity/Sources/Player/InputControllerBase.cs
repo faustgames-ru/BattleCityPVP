@@ -7,12 +7,12 @@ namespace BattleCity.Player
         public event DirectionEvent DirectionChanged;
         public event FireEvent Fire;
 
-        protected virtual void OnDirectionChanged(Vector3 direction)
+        protected void OnDirectionChanged(Vector3 direction)
         {
             DirectionChanged?.Invoke(this, direction);
         }
 
-        protected virtual void OnFire()
+        protected void OnFire()
         {
             Fire?.Invoke(this);
         }

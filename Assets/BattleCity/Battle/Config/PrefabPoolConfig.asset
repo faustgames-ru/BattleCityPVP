@@ -19,7 +19,7 @@ MonoBehaviour:
     capacity: 1
     reportEvents: 1
     mode: 0
-  - prefabId: Projectile
+  - prefabId: ProjectileMaster
     origin: {fileID: 5242300048871449544, guid: cd5a942d38aac6f43b93032bdc89622f,
       type: 3}
     capacity: 16
@@ -31,3 +31,9 @@ MonoBehaviour:
     capacity: 1
     reportEvents: 1
     mode: 0
+  - prefabId: ProjectileSlave
+    origin: {fileID: 5242300048871449544, guid: 52af42562e9c3ba46ac28ba152f7dd7e,
+      type: 3}
+    capacity: 16
+    reportEvents: 1
+    mode: 1

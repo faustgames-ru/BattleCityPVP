@@ -10,7 +10,7 @@ namespace BattleCity.Game
         public string loseEvent = "LOSE";
         public string victoryEvent = "VICTORY";
         public bool gameFinished;
-
+        
         public void MinePlayerDead()
         {
             if (gameFinished) return;

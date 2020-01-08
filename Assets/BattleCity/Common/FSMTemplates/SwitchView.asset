@@ -242,7 +242,7 @@ MonoBehaviour:
         - ownerOption: 1
           gameObject:
             useVariable: 1
-            name: 
+            name: ShowView
             tooltip: 
             showInInspector: 1
             networkSync: 0
@@ -408,7 +408,7 @@ MonoBehaviour:
         - ownerOption: 1
           gameObject:
             useVariable: 1
-            name: 
+            name: ShowView
             tooltip: 
             showInInspector: 1
             networkSync: 0

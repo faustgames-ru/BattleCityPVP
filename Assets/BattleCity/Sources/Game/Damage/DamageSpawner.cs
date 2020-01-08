@@ -6,8 +6,10 @@ namespace BattleCity.Game.Damage
 {
     public class DamageSpawner
     {
+        public DamageLayer damageLayer = DamageLayer.All;
+        public bool collisionWithSpawners = true;
+
         public int Damage => _model.damage;
-        public bool HasCollision { get; private set; }
         public event Action Dead;
         public event Action Collision;
         public event Action Muted;
@@ -25,8 +27,7 @@ namespace BattleCity.Game.Damage
             _transform = transform;
             _model = model;
         }
-
-
+        
         public bool IsMuted => Time.time >= _muteTime;
         public bool IsAlive => Time.time < _dieTime;
 

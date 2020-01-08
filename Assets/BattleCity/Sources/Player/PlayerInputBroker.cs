@@ -6,18 +6,12 @@ namespace BattleCity.Player
 {
     public class PlayerInputBroker : MonoBehaviour
     {
-        [SerializeField]
-        private PlayerModel playerModel;
-        [SerializeField]
-        private PlayerMoveController moveController;
-        [SerializeField]
-        private PlayerDirectionController directionController;
-        [SerializeField]
-        private PlayerFireController fireController;
-        [SerializeField]
-        private InputControllerBase inputController;
-        [SerializeField]
-        private PhotonView photonView;
+        [SerializeField] private PlayerModel playerModel;
+        [SerializeField] private PlayerMoveController moveController;
+        [SerializeField] private PlayerDirectionController directionController;
+        [SerializeField] private PlayerFireController fireController;
+        [SerializeField] private InputControllerBase inputController;
+        [SerializeField] private PhotonView photonView;
 
         private void Awake()
         {
@@ -27,6 +21,7 @@ namespace BattleCity.Player
 
         private void InputControllerOnFire(object sender)
         {
+            if (!gameObject.activeInHierarchy) return;
             if (!photonView.IsMine && PhotonNetwork.IsConnected) return;
             fireController.Fire(moveController.GetPosition(), directionController.GetDirection());
         }
@@ -36,6 +31,11 @@ namespace BattleCity.Player
             if (!photonView.IsMine && PhotonNetwork.IsConnected) return;
             directionController.SetDirection(direction);
             moveController.SetVelocity(direction * playerModel.moveVelocity);
+        }
+
+        private void FixedUpdate()
+        {
+            InputControllerOnFire(null);
         }
     }
 }

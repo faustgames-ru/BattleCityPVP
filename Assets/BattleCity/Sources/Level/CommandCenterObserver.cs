@@ -1,6 +1,7 @@
 ﻿using BattleCity.Config;
 using BattleCity.Game;
 using BattleCity.Game.Damage;
+using CoreUtils.EnumsUtils;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
@@ -9,6 +10,9 @@ namespace BattleCity.Level
 {
     public class CommandCenterObserver : MonoBehaviour, IPunObservable
     {
+        [EnumFlags]
+        [SerializeField] private DamageLayer damageLayer = DamageLayer.All;
+
         public float damageZone = 0.32f;
         public CommandCenterModel model;
         public GameObject view;
@@ -22,8 +26,7 @@ namespace BattleCity.Level
 
         private void Awake()
         {
-            _damageReceiver = new DamageReceiver(model.damageReceiver);
-
+            _damageReceiver = new DamageReceiver(model.damageReceiver) {damageLayer = damageLayer};
             damageFilter.receiverBounds = new Bounds(transform.position, new Vector3(damageZone, damageZone, 0));
             damageFilter.damageReceiver = _damageReceiver;
         }

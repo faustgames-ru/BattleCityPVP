@@ -4,25 +4,23 @@ using BattleCity.Game;
 using BattleCity.Game.Damage;
 using BattleCity.Level;
 using CoreUtils.Collections;
+using CoreUtils.EnumsUtils;
 using Photon.Pun;
 using UnityEngine;
 
 namespace BattleCity.Player
 {
-    public class Projectile: MonoBehaviour, IDamageSystemInject
+    public class Projectile : MonoBehaviour, IDamageSystemInject
     {
-        [SerializeField]
-        private PoolListener poolListener;
-        [SerializeField]
-        private Rigidbody2D body;
-        [SerializeField]
-        private PlayerModel playerModel;
-        [SerializeField]
-        private PhotonView photonView;
-        [SerializeField]
-        private GameObject view;
-        [SerializeField]
-        private ParticleSystem explosion;
+        [SerializeField] private PoolListener poolListener;
+        [SerializeField] private Rigidbody2D body;
+        [SerializeField] private PlayerModel playerModel;
+        [SerializeField] private PhotonView photonView;
+        [SerializeField] private GameObject view;
+        [SerializeField] private ParticleSystem explosion;
+        [SerializeField] private AudioSource explosionSound;
+        [EnumFlags]
+        [SerializeField] private DamageLayer damageLayer = DamageLayer.All;
 
         private PoolItem _poolItem;
         private Transform _transform;
@@ -32,12 +30,18 @@ namespace BattleCity.Player
         private void Awake()
         {
             _transform = GetComponent<Transform>();
-            _damageSpawner = new DamageSpawner(_transform, playerModel.damageSpawner);
+            _damageSpawner = new DamageSpawner(_transform, playerModel.damageSpawner) {damageLayer = damageLayer};
             _damageSpawner.Muted += DamageSpawnerOnMuted;
             _damageSpawner.Dead += DamageSpawnerOnDead;
             _damageSpawner.Collision += DamageSpawnerOnCollision;
+
             poolListener.GetInstance += PoolListenerOnGetInstance;
             poolListener.ReturnInstance += PoolListenerOnReturnInstance;
+        }
+
+        public void Inject(DamageSystem damageSystem)
+        {
+            _damageSystem = damageSystem;
         }
 
         private void DamageSpawnerOnMuted()
@@ -47,21 +51,26 @@ namespace BattleCity.Player
 
         private void DamageSpawnerOnCollision()
         {
-            if (explosion != null)
-            {
-                explosion.Play();
-            }
+            PlayExplosionFx();
+            PlayExplosionAudioFx();
+        }
+
+        private void PlayExplosionFx()
+        {
+            if (explosion == null) return;
+            explosion.Play();
+        }
+
+        private void PlayExplosionAudioFx()
+        {
+            if (explosionSound == null) return;
+            explosionSound.Play();
         }
 
         private void DamageSpawnerOnDead()
         {
             if (!photonView.IsMine && PhotonNetwork.IsConnected) return;
             PhotonNetwork.Destroy(_poolItem.Instance);
-        }
-
-        public void Inject(DamageSystem damageSystem)
-        {
-            _damageSystem = damageSystem;
         }
 
         private void PoolListenerOnGetInstance(PoolItem sender)
